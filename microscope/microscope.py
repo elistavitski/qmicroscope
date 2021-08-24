@@ -84,6 +84,7 @@ class Microscope(QWidget):
         tic = time.perf_counter()
         painter = QPainter(self)
         rect = event.rect()
+        self.image = self.image.scaledToWidth(646)
         painter.drawImage(rect, self.image, rect)
         painter.setPen(QColor.fromRgb(255, 0, 0))
         #painter.drawPoints(self.clicks)
@@ -165,6 +166,7 @@ class Microscope(QWidget):
         self.end = pos
         self.update()
 
+
     def mouseMoveEvent(self, event):
         self.end = event.pos()
         self.update()
@@ -179,6 +181,7 @@ class Microscope(QWidget):
     def updateImageData(self, image):
         """ Triggered when the new image is ready, update the view. """
         self.image.loadFromData(image, 'JPG')
+        self.image = self.image.scaledToWidth(646)
         self.updatedImageSize()
         self.update()
 
